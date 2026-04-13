@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Placement Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Placement Portal</h1>
+<h2>Register</h2>
+
+{% if error %}
+<div style="color: red; background-color: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <strong>Error:</strong> {{ error }}
+</div>
+{% endif %}
+
+<form method="post">
+
+    <!-- NAME -->
+    <input 
+        type="text" 
+        name="name" 
+        placeholder="Enter Name" 
+        value="{{ name }}"
+        required
+    >
+
+    <!-- EMAIL -->
+    <input 
+        type="email" 
+        name="email" 
+        placeholder="Enter Email" 
+        required
+    >
+
+    <!-- PASSWORD -->
+    <input 
+        type="password" 
+        name="password" 
+        placeholder="Enter Password" 
+        required
+    >
+
+    <!-- ROLE -->
+    <select name="role" required>
+        <option value="">Select Role</option>
+        <option value="student" {% if role == "student" %}selected{% endif %}>Student</option>
+        <option value="company" {% if role == "company" %}selected{% endif %}>Company</option>
+    </select>
+    {% if role == "company" %}
+    <input type="text" name="hr_contact" placeholder="HR Contact" required>
+    <input type="text" name="website" placeholder="Company Website" required>
+    {% endif %}
+
+    <!-- REGISTER BUTTON -->
+    <button type="submit">Register</button>
+
+</form>
+
+<br>
+
+<!-- BACK BUTTON -->
+<a href="javascript:history.back()">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</div>
+
+</body>
+</html>

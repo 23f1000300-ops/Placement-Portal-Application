@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Welcome {{ student[1] }} 👋</h2>
+
+<form action="/search" method="get" style="margin-bottom: 20px;">
+    <input type="text" name="q" placeholder="Search students, companies, drives..." required>
+    <button type="submit">Search</button>
+</form>
+
+
+<!-- ================= PROFILE ================= -->
+<div class="section">
+<h3>Profile</h3>
+
+<p><b>Name:</b> {{ student[1] }}</p>
+
+<p>
+<b>Resume:</b>
+{% if student[2] %}
+    Uploaded ✅
+{% else %}
+    Not Uploaded ❌
+{% endif %}
+</p>
+
+<a href="/edit_profile">
+    <button>Edit Profile</button>
+</a>
+
+<form action="/upload_resume" method="post" enctype="multipart/form-data">
+    <input type="file" name="resume" required>
+    <button>Upload / Replace Resume</button>
+</form>
+
+{% if student[2] %}
+<a href="/view_resume">
+    <button class="view">View Resume</button>
+</a>
+{% endif %}
+
+<a href="/history">
+    <button>View History</button>
+</a>
+
+</div>
+
+<!-- ================= AVAILABLE DRIVES ================= -->
+<div class="section">
+<h3>Available Drives</h3>
+
+{% if drives %}
+
+{% for d in drives %}
+<div class="row">
+
+    <div>
+    <strong>{{ d[1] }}</strong><br>
+    <p>{{ d[2] }}</p>
+
+    <small><b>Eligibility:</b> {{ d[4] }}</small><br>
+    <small><b>Deadline:</b> {{ d[5] }}</small><br>
+    <small><b>Location:</b> {{ d[6] }}</small><br>
+    <small><b>Salary:</b> {% if d[8] %}{{ d[8] }} LPA{% else %}Not specified{% endif %}</small>
+</div>
+
+    <div>
+
+        {% if d[0] in applied_dict %}
+
+            {% if applied_dict[d[0]] == "applied" %}
+                <span style="color:blue;">Applied</span>
+
+            {% elif applied_dict[d[0]] == "shortlisted" %}
+                <span style="color:green;">Shortlisted</span>
+
+            {% elif applied_dict[d[0]] == "rejected" %}
+                <span style="color:red;">Rejected</span><br>
+                <small>Reason: {{ applied_remarks[d[0]] or 'No remarks provided' }}</small>
+
+            {% else %}
+                <span>{{ applied_dict[d[0]] }}</span>
+            {% endif %}
+
+        {% else %}
+
+            <form action="/apply/{{ d[0] }}" method="get">
+                <button>Apply</button>
+            </form>
+
+        {% endif %}
+
+    </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<p>No drives available.</p>
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- ================= BACK BUTTON ================= -->
+<a href="javascript:history.back()">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>

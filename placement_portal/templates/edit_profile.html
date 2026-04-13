@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="container">
+
+<h2>Edit Profile</h2>
+
+<form method="post">
+
+    <!-- NAME -->
+    <input 
+        name="name" 
+        value="{{ student[0] if student else '' }}" 
+        placeholder="Enter your name" 
+        required
+    >
+
+    <!-- UPDATE BUTTON -->
+    <button type="submit">Update Profile</button>
+
+</form>
+
+</div>
+
+<!-- BACK BUTTON -->
+<a href="javascript:history.back()">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>

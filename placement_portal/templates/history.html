@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Application History 📄</h2>
+
+{% if history %}
+
+<table>
+    <tr>
+        <th>Drive</th>
+        <th>Company</th>
+        <th>Status</th>
+        <th>Remark</th>
+    </tr>
+
+    {% for h in history %}
+    <tr>
+        <td>{{ h[0] }}</td>
+        <td>{{ h[1] }}</td>
+
+        <td>
+            {% if h[2] == "applied" %}
+                <span style="color:blue;">Applied</span>
+            {% elif h[2] == "shortlisted" %}
+                <span style="color:green;">Shortlisted</span>
+            {% elif h[2] == "rejected" %}
+                <span style="color:red;">Rejected</span>
+            {% else %}
+                {{ h[2] }}
+            {% endif %}
+        </td>
+        <td>{{ h[3] or '' }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+<p>No application history found.</p>
+{% endif %}
+
+</div>
+
+<!-- BACK BUTTON -->
+<a href="javascript:history.back()">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>

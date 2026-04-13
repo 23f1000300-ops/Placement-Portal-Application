@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Details - Placement Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .form-step-indicator {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-back-container">
+    <a href="/register">
+        <button class="top-back">⬅ Back</button>
+    </a>
+</div>
+
+<div class="container">
+
+<h1>Placement Portal</h1>
+<h2>Register - Complete Your Details</h2>
+
+<div class="form-step-indicator">
+    Step 2 of 2 | Role: <strong>{{ role.capitalize() }}</strong>
+</div>
+
+{% if error %}
+<div style="color: red; background-color: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <strong>Error:</strong> {{ error }}
+</div>
+{% endif %}
+
+<form method="post">
+
+    <!-- NAME -->
+    <input 
+        type="text" 
+        name="name" 
+        placeholder="Enter Full Name" 
+        value="{{ name }}"
+        required
+    >
+
+    <!-- EMAIL -->
+    <input 
+        type="email" 
+        name="email" 
+        placeholder="Enter Email" 
+        required
+    >
+
+    <!-- PASSWORD -->
+    <input 
+        type="password" 
+        name="password" 
+        placeholder="Enter Password" 
+        required
+    >
+
+    {% if role == 'student' %}
+    
+    <!-- STUDENT FIELDS -->
+    <input 
+        type="tel" 
+        name="contact_number" 
+        placeholder="Enter Contact Number" 
+        required
+    >
+
+    {% elif role == 'company' %}
+    
+    <!-- COMPANY FIELDS -->
+    <input 
+        type="tel" 
+        name="hr_contact" 
+        placeholder="HR Contact Number" 
+        required
+    >
+
+    <input 
+        type="url" 
+        name="website" 
+        placeholder="Company Website" 
+        required
+    >
+
+    <textarea 
+        name="description" 
+        placeholder="Company Description" 
+        rows="4"
+        required
+    ></textarea>
+
+    {% endif %}
+
+    <!-- REGISTER BUTTON -->
+    <button type="submit">Register</button>
+
+</form>
+
+<br>
+
+<!-- BACK BUTTON -->
+<a href="/register">
+    <button class="back-btn">⬅ Change Role</button>
+</a>
+
+</div>
+
+</body>
+</html>

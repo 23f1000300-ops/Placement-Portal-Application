@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Placement Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Placement Portal</h1>
+<h2>Login</h2>
+
+<form method="post">
+
+    <!-- EMAIL -->
+    <input 
+        type="email" 
+        name="email" 
+        placeholder="Enter Email" 
+        required
+    >
+
+    <!-- PASSWORD -->
+    <input 
+        type="password" 
+        name="password" 
+        placeholder="Enter Password" 
+        required
+    >
+
+    <!-- LOGIN BUTTON -->
+    <button type="submit">Login</button>
+
+</form>
+
+<br>
+
+<!-- REGISTER LINK -->
+<p>Don't have an account?</p>
+<a href="/register">
+    <button>Register</button>
+</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+/* ===== GLOBAL ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #c7e1fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== CONTAINER (LOGIN / REGISTER) ===== */
+.container {
+    width: 320px;
+    margin: 80px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-left: 5px solid #4CAF50;
+    text-align: center;
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard {
+    width: 85%;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== HEADINGS ===== */
+h1, h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #444;
+    margin-top: 25px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* ===== INPUTS ===== */
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    width: 95%;
+    padding: 10px;
+    margin-top: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* ===== SMALL BUTTONS ===== */
+button.small {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 12px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+/* ===== BUTTON COLORS ===== */
+.approve {
+    background-color: #4CAF50;
+}
+
+.reject {
+    background-color: #f44336;
+}
+
+.view {
+    background-color: #2196F3;
+}
+
+.blacklist {
+    background-color: #ff9800;
+}
+
+/* ===== ROW (LIST ITEMS) ===== */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: 0.2s;
+}
+
+.row:hover {
+    background-color: #f1f1f1;
+}
+
+/* ===== SECTION ===== */
+.section {
+    margin-top: 20px;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* ===== BACK BUTTON (CENTERED BELOW) ===== */
+.back-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-btn:hover {
+    background: #555;
+}
+
+/* ===== LINKS ===== */
+a {
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .dashboard {
+        width: 95%;
+    }
+
+    .row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    button.small {
+        margin-top: 5px;
+    }
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+}
+
+/* ===== TOP RIGHT BACK BUTTON (SCROLLABLE) ===== */
+.top-back-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 20px 0 0;
+}
+
+.top-back {
+    padding: 6px 12px;
+    background: #333;
+    color: white;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.top-back:hover {
+    background: #555;
+}
+
+.top-back-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 10px 20px 0 0;
+}
+
+.top-back {
+    padding: 6px 12px;
+    background: #333;
+    color: white;
+    border-radius: 6px;
+}
+
+.logout-btn {
+    padding: 6px 12px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 6px;
+}
+
+/* ===== HOVER COLORS FIX ===== */
+
+/* 🔴 BLACKLIST → RED ON HOVER */
+.blacklist:hover {
+    background-color: #e74c3c !important;
+}
+
+/* 🟢 UNBLOCK (APPROVE) → GREEN ON HOVER */
+.approve:hover {
+    background-color: #2ecc71 !important;
+}

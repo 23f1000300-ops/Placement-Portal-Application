@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Welcome Admin 👋</h2>
+
+<form action="/search" method="get" style="margin-bottom: 20px;">
+    <input type="text" name="q" placeholder="Search students, companies, drives..." required>
+    <button type="submit">Search</button>
+</form>
+
+<!-- ================= COMPANY APPLICATIONS ================= -->
+<div class="section">
+<h3>Company Applications</h3>
+
+{% for c in pending_companies %}
+<div class="row">
+    <div>
+        <strong>{{ c[1] }}</strong><br>
+        <small>{{ c[2] }}</small>
+    </div>
+
+    <div>
+        <a href="/approve_company/{{ c[0] }}">
+            <button class="small approve">Approve</button>
+        </a>
+
+        <a href="/reject_company/{{ c[0] }}">
+            <button class="small reject">Reject</button>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ================= APPROVED COMPANIES ================= -->
+<div class="section">
+<h3>Approved Companies</h3>
+
+{% for c in approved_companies %}
+<div class="row">
+    <div>
+        <strong>{{ c[1] }}</strong><br>
+        <small>{{ c[2] }}</small>
+    </div>
+
+    <div>
+       {% if c[3] == 1 %}
+        <a href="/unblock/{{ c[4] }}">
+            <button class="small approve">Unblock</button>
+        </a>
+        {% else %}
+        <a href="/blacklist/{{ c[4] }}">
+            <button class="small blacklist">Blacklist</button>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ================= REJECTED COMPANIES ================= -->
+<div class="section">
+<h3>Rejected Companies</h3>
+
+{% for c in rejected_companies %}
+<div class="row">
+    <div>
+        <strong>{{ c[1] }}</strong><br>
+        <small>{{ c[2] }}</small>
+    </div>
+
+    <div>
+        <a href="/approve_company/{{ c[0] }}">
+            <button class="small approve">Approve</button>
+        </a>
+    </div>
+</div>
+{% else %}
+<p>No rejected companies.</p>
+{% endfor %}
+
+</div>
+
+<!-- ================= STUDENTS ================= -->
+<div class="section">
+<h3>Registered Students</h3>
+
+{% for s in students %}
+<div class="row">
+    <div>
+    <strong>{{ s[2] }}</strong><br>
+    <small>{{ s[3] }}</small>
+    </div>
+
+    <div>
+        <!-- ✅ VIEW uses student_id -->
+        <a href="/view_student/{{ s[0] }}">
+            <button class="small view">View</button>
+        </a>
+
+        <!-- ✅ BLOCK uses user_id -->
+        {% if s[4] == 1 %}
+        <a href="/unblock/{{ s[1] }}">
+            <button class="small approve">Unblock</button>
+        </a>
+        {% else %}
+        <a href="/blacklist/{{ s[1] }}">
+            <button class="small blacklist">Blacklist</button>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ================= PENDING DRIVES ================= -->
+<div class="section">
+<h3>Drive Applications</h3>
+
+{% for d in pending_drives %}
+<div class="row">
+    <div>
+        <strong>{{ d[1] }}</strong><br>
+        <small>{{ d[2] }}</small>
+    </div>
+
+    <div>
+        <a href="/approve_job/{{ d[0] }}">
+            <button class="small approve">Approve</button>
+        </a>
+
+        <a href="/reject_job/{{ d[0] }}">
+            <button class="small reject">Reject</button>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ================= APPROVED DRIVES ================= -->
+<div class="section">
+<h3>Ongoing Drives</h3>
+
+{% for d in approved_drives %}
+<div class="row">
+    <div>
+        <strong>{{ d[1] }}</strong><br>
+        <small>{{ d[2] }}</small>
+    </div>
+
+    <div>
+        <a href="/complete_drive/{{ d[0] }}">
+            <button class="small approve">Mark Complete</button>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ================= COMPLETED DRIVES ================= -->
+<div class="section">
+<h3>Completed Drives ✅</h3>
+
+{% for d in completed_drives %}
+<div class="row">
+    <div>
+        <strong>{{ d[1] }}</strong><br>
+        <small>{{ d[2] }}</small>
+    </div>
+</div>
+{% else %}
+<p>No completed drives yet.</p>
+{% endfor %}
+
+</div>
+
+<!-- ================= APPLICATIONS ================= -->
+<div class="section">
+<h3>Student Applications</h3>
+
+{% for a in applications %}
+<div class="row">
+    <span><strong>{{ a[1] }}</strong> → {{ a[2] }}</span>
+
+    <a href="/view_application/{{ a[0] }}">
+        <button class="small view">View</button>
+    </a>
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+<!-- BACK BUTTON -->
+<a href="javascript:history.back()">
+<button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>

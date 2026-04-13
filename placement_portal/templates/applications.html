@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Applications</h2>
+
+{% if apps %}
+
+{% for a in apps %}
+<div class="row">
+
+    <div>
+        <strong>{{ a[1] }}</strong><br>
+        <small><b>Contact:</b> {{ a[2] or 'Not provided' }}</small><br>
+        <small><b>Email:</b> {{ a[3] or 'Not provided' }}</small><br>
+        {% if a[4] == "applied" %}
+            <small style="color:blue;">Applied</small>
+        {% elif a[4] == "shortlisted" %}
+            <small style="color:green;">Shortlisted</small>
+        {% elif a[4] == "rejected" %}
+            <small style="color:red;">Rejected</small><br>
+            <small>Reason: {{ a[5] or 'No remarks provided' }}</small>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="/view_resume_admin/{{ a[6] }}">
+            <button class="small view">View Resume</button>
+        </a>
+
+        {% if a[4] == "applied" %}
+            <a href="/review_application/{{ a[0] }}/shortlisted">
+                <button class="small approve">Shortlist</button>
+            </a>
+            <form action="/review_application/{{ a[0] }}/rejected" method="post" style="display:inline;">
+                <input type="text" name="remarks" placeholder="Rejection remarks" required>
+                <button class="small reject">Reject</button>
+            </form>
+        {% endif %}
+
+    </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<p>No applications found.</p>
+{% endif %}
+
+</div>
+
+<!-- BACK BUTTON -->
+<a href="javascript:history.back()">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>

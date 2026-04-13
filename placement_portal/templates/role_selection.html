@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Select Role - Placement Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .role-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .role-box {
+            border: 2px solid #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .role-box:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+        
+        .role-box input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .role-box h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        .role-box p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .role-box input[type="radio"]:checked + label {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-back-container">
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+</div>
+
+<div class="container">
+
+<h1>Placement Portal</h1>
+<h2>Register - Select Your Role</h2>
+
+<form method="post">
+
+    <div class="role-container">
+        <label class="role-box">
+            <input type="radio" name="role" value="student" required>
+            <h3>👨‍🎓 Student</h3>
+            <p>Join as a student to explore job opportunities</p>
+        </label>
+        
+        <label class="role-box">
+            <input type="radio" name="role" value="company" required>
+            <h3>🏢 Company</h3>
+            <p>Register your company to recruit talent</p>
+        </label>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button type="submit" class="btn" style="padding: 12px 40px; font-size: 16px;">Next →</button>
+    </div>
+
+</form>
+
+<p style="text-align: center; margin-top: 20px;">
+    Already have an account? <a href="/login">Login here</a>
+</p>
+
+</div>
+
+</body>
+</html>

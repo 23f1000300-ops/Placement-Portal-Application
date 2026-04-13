@@ -1,0 +1,42 @@
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Search Results for "{{ query }}" 🔍</h2>
+
+<h3>Students</h3>
+{% for s in students %}
+<p>{{ s[0] }}</p>
+{% else %}
+<p>No students found</p>
+{% endfor %}
+
+<h3>Companies</h3>
+{% for c in companies %}
+<p>{{ c[0] }}</p>
+{% else %}
+<p>No companies found</p>
+{% endfor %}
+
+<h3>Drives</h3>
+{% for d in drives %}
+<p>{{ d[0] }}</p>
+{% else %}
+<p>No drives found</p>
+{% endfor %}
+
+</div>
+
+<a href="javascript:history.back()">
+<button class="back-btn">⬅ Back</button>
+</a>

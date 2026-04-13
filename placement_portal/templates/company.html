@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="javascript:history.back()">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Hello! {{ company[1] }} 🏢</h2>
+
+<form action="/search" method="get" style="margin-bottom: 20px;">
+    <input type="text" name="q" placeholder="Search students, companies, drives..." required>
+    <button type="submit">Search</button>
+</form>
+
+<!-- ================= CREATE DRIVE ================= -->
+<div class="section">
+<h3>Create Placement Drive</h3>
+
+<form method="post">
+    <input name="title" placeholder="Drive Title" required>
+    <input name="description" placeholder="Description" required>
+
+    <input name="eligibility" placeholder="Eligibility Criteria" required>
+    <input name="deadline" type="date" required>
+    <input name="location" placeholder="Job Location">
+    <input name="salary" placeholder="Salary Package">
+
+    <!-- ✅ IMPORTANT: BUTTON INSIDE FORM -->
+    <button type="submit">Create Drive</button>
+</form>
+</div>
+
+<!-- ================= YOUR APPROVED DRIVES ================= -->
+<div class="section">
+<h3>Active Drives 📋</h3>
+
+{% if approved_drives %}
+
+{% for d in approved_drives %}
+<div class="row">
+
+    <div>
+        <strong>{{ d[2] }}</strong><br>
+        <small>Status: <span style="color: green;">{{ d[4] }}</span></small><br>
+        <small>Salary: {% if d[8] %}{{ d[8] }} (LPA){% else %}Not specified{% endif %}</small>
+    </div>
+
+    <div>
+        <!-- VIEW APPLICATIONS -->
+        <a href="/view_applications/{{ d[0] }}">
+            <button class="small view">Applications</button>
+        </a>
+
+        <!-- EDIT BUTTON -->
+        <a href="/edit_drive/{{ d[0] }}">
+            <button class="small approve">Edit</button>
+        </a>
+
+        <!-- DELETE BUTTON -->
+        <a href="/confirm_delete_drive/{{ d[0] }}">
+            <button class="small reject">Delete</button>
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<p>No active drives created yet.</p>
+{% endif %}
+
+</div>
+
+<!-- ================= PENDING APPROVAL DRIVES ================= -->
+<div class="section">
+<h3>Pending Admin Approval ⏳</h3>
+
+{% if pending_drives %}
+
+{% for d in pending_drives %}
+<div class="row">
+
+    <div>
+        <strong>{{ d[2] }}</strong><br>
+        <small>Status: <span style="color: #ff9800;">{{ d[4] }}</span> - Waiting for admin approval...</small><br>
+        <small>Salary: {% if d[8] %}{{ d[8] }} (LPA){% else %}Not specified{% endif %}</small>
+    </div>
+
+    <div>
+        <!-- EDIT BUTTON -->
+        <a href="/edit_drive/{{ d[0] }}">
+            <button class="small approve">Edit</button>
+        </a>
+
+        <!-- DELETE BUTTON -->
+        <a href="/confirm_delete_drive/{{ d[0] }}">
+            <button class="small reject">Delete</button>
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<p>No pending drives.</p>
+{% endif %}
+
+</div>
+
+<!-- ================= REJECTED DRIVES ================= -->
+<div class="section">
+<h3>Rejected Drives ❌</h3>
+
+{% if rejected_drives %}
+
+{% for d in rejected_drives %}
+<div class="row">
+
+    <div>
+        <strong>{{ d[2] }}</strong><br>
+        <small>Status: <span style="color: red;">{{ d[4] }}</span></small><br>
+        <small>Salary: {% if d[8] %}{{ d[8] }} (LPA){% else %}Not specified{% endif %}</small>
+    </div>
+
+    <div>
+        <!-- EDIT BUTTON -->
+        <a href="/edit_drive/{{ d[0] }}">
+            <button class="small approve">Edit</button>
+        </a>
+
+        <!-- DELETE BUTTON -->
+        <a href="/confirm_delete_drive/{{ d[0] }}">
+            <button class="small reject">Delete</button>
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<p>No rejected drives.</p>
+{% endif %}
+
+</div>
+
+<!-- ================= COMPLETED DRIVES ================= -->
+<div class="section">
+<h3>Completed Drives ✅</h3>
+
+{% if completed_drives %}
+
+{% for d in completed_drives %}
+<div class="row">
+
+    <div>
+        <strong>{{ d[2] }}</strong><br>
+        <small>Status: <span style="color: #28a745;">{{ d[4] }}</span></small><br>
+        <small>Salary: {% if d[8] %}{{ d[8] }} (LPA){% else %}Not specified{% endif %}</small>
+    </div>
+
+    <div>
+        <!-- VIEW APPLICANTS -->
+        <a href="/view_applications/{{ d[0] }}">
+            <button class="small view">View Applicants</button>
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<p>No completed drives yet.</p>
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- BACK BUTTON -->
+<a href="javascript:history.back()">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>

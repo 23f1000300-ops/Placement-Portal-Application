@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Drive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-back-container">
+
+    <a href="/company_dashboard">
+        <button class="top-back">⬅ Back</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+<h2>Edit Placement Drive</h2>
+
+<div class="section">
+<p style="color: #ff9800; padding: 10px; background-color: #fff3cd; border-radius: 5px;">
+    <strong>Note:</strong> Changes will require admin approval before appearing on student dashboard.
+</p>
+
+<form method="post">
+    <input 
+        name="title" 
+        placeholder="Drive Title" 
+        value="{{ drive[2] }}"
+        required
+    >
+    <input 
+        name="description" 
+        placeholder="Description" 
+        value="{{ drive[3] }}"
+        required
+    >
+
+    <input 
+        name="eligibility" 
+        placeholder="Eligibility Criteria" 
+        value="{{ drive[4] }}"
+        required
+    >
+    <input 
+        name="deadline" 
+        type="date" 
+        value="{{ drive[5] }}"
+        required
+    >
+    <input 
+        name="location" 
+        placeholder="Job Location" 
+        value="{{ drive[6] }}"
+    >
+    <input 
+        name="salary" 
+        placeholder="Salary Package" 
+        value="{{ drive[7] }}"
+    >
+
+    <!-- SUBMIT BUTTON -->
+    <button type="submit">Update Drive</button>
+</form>
+
+</div>
+
+</div>
+
+<!-- BACK BUTTON -->
+<a href="/company_dashboard">
+    <button class="back-btn">⬅ Back</button>
+</a>
+
+</body>
+</html>
